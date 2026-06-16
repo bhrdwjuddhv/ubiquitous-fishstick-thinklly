@@ -47,6 +47,15 @@ export function LandingPage() {
             image: "/userTable.png",
             route: "/dashboard",
         },
+
+        {
+            id: 6,
+            title: "Design & Development Approach",
+            description:
+                "A detailed breakdown of the architectural decisions, design patterns, and engineering principles applied across the Thinklly frontend assessment — written for technical reviewers and hiring managers.",
+            image: "/approach.png",   // add your screenshot to public/approach.png
+            route: "/approach",
+        },
     ];
 
 

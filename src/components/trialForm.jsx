@@ -1,12 +1,15 @@
 import axiosInstance from "../api/axios.js";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
+import {EyeOff, Eye} from "lucide-react";
 
 export function TrialForm() {
 
     const {register, handleSubmit, formState: {errors}} = useForm();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const handleFormSubmit = async (data) => {
         setLoading(true);
@@ -170,31 +173,56 @@ export function TrialForm() {
                             Password
                         </label>
 
-                        <input
-                            type="password"
-                            id="password"
-                            className="
-                        w-full
-                        rounded-lg
-                        border
-                        border-[#C8553D]/20
-                        px-4
-                        py-3
-                        bg-white
-                        focus:outline-none
-                        focus:ring-2
-                        focus:ring-[#C8553D]
-                    "
-                            {...register("password", {
-                                required: "Password is required",
-                                pattern: {
-                                    value:
-                                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                                    message:
-                                        "Password must contain 8+ characters, one uppercase letter and one number",
-                                },
-                            })}
-                        />
+                        <div className="relative">
+
+                            <input
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                className="
+                w-full
+                rounded-lg
+                border
+                border-[#C8553D]/30
+                px-4
+                py-3
+                pr-12
+                bg-white
+                focus:outline-none
+                focus:ring-2
+                focus:ring-[#C8553D]
+            "
+                                {...register("password", {
+                                    required: "Password is required",
+                                    pattern: {
+                                        value:
+                                            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                                        message:
+                                            "Password must contain 8+ characters, one uppercase letter and one number",
+                                    },
+                                })}
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="
+                absolute
+                right-4
+                top-1/2
+                -translate-y-1/2
+                text-[#666666]
+                hover:text-[#C8553D]
+                transition-colors
+            "
+                            >
+                                {showPassword ? (
+                                    <EyeOff size={20} />
+                                ) : (
+                                    <Eye size={20} />
+                                )}
+                            </button>
+
+                        </div>
 
                         {errors.password && (
                             <p className="mt-1 text-sm text-red-500">

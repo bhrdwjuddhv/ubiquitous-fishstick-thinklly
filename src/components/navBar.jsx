@@ -12,6 +12,13 @@ export function NavBar() {
                 : "text-[#222222] hover:bg-[#F2D06B]/40 hover:text-[#C8553D]"
         }`;
 
+   const Links = [
+       {to: "/login", label: "Login" },
+       { to: "/dashboard", label: "Dashboard" },
+       { to: "/trial-form", label: "Trial Form" },
+       { to: "/approach", label: "Design Approach" },
+   ]
+
     return (
         <nav className="sticky top-0 z-50 bg-[#F9F1DC] border-b border-[#C8553D]/20 shadow-sm">
             <div className="max-w-7xl mx-auto px-6">
@@ -26,17 +33,13 @@ export function NavBar() {
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center gap-3 font-['Karla']">
-                        <NavLink to="/login" className={navLinkClass}>
-                            Login
-                        </NavLink>
-
-                        <NavLink to="/dashboard" className={navLinkClass}>
-                            Dashboard
-                        </NavLink>
-
-                        <NavLink to="/trial-form" className={navLinkClass}>
-                            Trial Form
-                        </NavLink>
+                        {
+                            Links.map((link) =>  (
+                            <NavLink to={link.to} className={navLinkClass}>
+                                {link.label}
+                            </NavLink>
+                            ) )
+                        }
                     </div>
 
                     {/* Mobile Toggle */}
@@ -51,29 +54,15 @@ export function NavBar() {
                 {/* Mobile Menu */}
                 {isOpen && (
                     <div className="md:hidden pb-4 flex flex-col gap-2 font-['Karla']">
-                        <NavLink
-                            to="/login"
-                            className={navLinkClass}
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Login
-                        </NavLink>
-
-                        <NavLink
-                            to="/dashboard"
-                            className={navLinkClass}
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Dashboard
-                        </NavLink>
-
-                        <NavLink
-                            to="/trial-form"
-                            className={navLinkClass}
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Trial Form
-                        </NavLink>
+                        {Links.map((link) => (
+                            <NavLink
+                                to={link.to}
+                                className={navLinkClass}
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {link.label}
+                            </NavLink>
+                        ))}
                     </div>
                 )}
             </div>
