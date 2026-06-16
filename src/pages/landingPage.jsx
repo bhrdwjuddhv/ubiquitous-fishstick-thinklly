@@ -44,7 +44,7 @@ export function LandingPage() {
             title: "Data Table with Search & Filter",
             description:
                 "Responsive user table displaying fetched user data with support for searching, filtering, and user information management.",
-            image: "/userTable.png",
+            image: "/dataTable.png",
             route: "/dashboard",
         },
 
