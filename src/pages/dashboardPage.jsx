@@ -15,6 +15,9 @@ export function DashboardPage() {
     const [activeView, setActiveView] = useState("dashboard");
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [genderFilter, setGenderFilter] = useState("all");
+
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -41,6 +44,25 @@ export function DashboardPage() {
         };
         fetchUsers();
     }, [numberOfUsers]);
+
+    const filterUsers = users.filter((user) => {
+        const fullName = `${user.name.first} ${user.name.last}`.toLowerCase();
+        const email = user.email.toLowerCase();
+
+        const matchedUsers = fullName.includes(searchTerm.toLowerCase()) || email.includes(searchTerm.toLowerCase())
+
+        let genderMatches = false;
+
+        if (genderFilter === "all") {
+            genderMatches = true;
+        } else if (user.gender === genderFilter) {
+            genderMatches = true;
+        }
+
+        return matchedUsers && genderMatches;
+
+    })
+
 
     const handleNumberOfUsers = (e) => {
         const value = e.target.value;
@@ -149,28 +171,90 @@ export function DashboardPage() {
 
                 <div className="p-6">
 
-                    {/* User Count Control */}
-                    <div className="mb-6">
-                        <label className="block mb-2 text-[#222222] font-medium">
-                            Number of Users
-                        </label>
+                    <div className="mb-6 flex flex-col md:flex-row gap-4 items-start md:items-end">
 
-                        <input
-                            type="number"
-                            value={numberOfUsers}
-                            min={1}
-                            max={100}
-                            className="
-                                w-40
-                                rounded-lg
-                                border
-                                border-[#C8553D]/20
-                                px-4
-                                py-2
-                                bg-white
-                            "
-                            onChange={(e) => {handleNumberOfUsers(e)}}
-                        />
+                        {/* Number of Users */}
+                        <div>
+                            <label className="block mb-2 text-[#222222] font-medium">
+                                Number of Users
+                            </label>
+
+                            <input
+                                type="number"
+                                value={numberOfUsers}
+                                className="
+                                            w-40
+                                            rounded-lg
+                                            border
+                                            border-[#C8553D]/20
+                                            px-4
+                                            py-2
+                                            bg-white
+                                            focus:outline-none
+                                            focus:ring-2
+                                            focus:ring-[#C8553D]
+                                        "
+                                onChange={handleNumberOfUsers}
+                            />
+                        </div>
+
+                        {/* Search */}
+                        <div>
+                            <label className="block mb-2 text-[#222222] font-medium">
+                                Search User
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Name or Email"
+                                value={searchTerm}
+                                onChange={(e) =>
+                                    setSearchTerm(e.target.value)
+                                }
+                                className="
+                                            w-64
+                                            rounded-lg
+                                            border
+                                            border-[#C8553D]/20
+                                            px-4
+                                            py-2
+                                            bg-white
+                                            focus:outline-none
+                                            focus:ring-2
+                                            focus:ring-[#C8553D]
+                                        "
+                            />
+                        </div>
+
+                        {/* Gender Filter */}
+                        <div>
+                            <label className="block mb-2 text-[#222222] font-medium">
+                                Gender
+                            </label>
+
+                            <select
+                                value={genderFilter}
+                                onChange={(e) =>
+                                    setGenderFilter(e.target.value)
+                                }
+                                className="
+                                            rounded-lg
+                                            border
+                                            border-[#C8553D]/20
+                                            px-4
+                                            py-2
+                                            bg-white
+                                            focus:outline-none
+                                            focus:ring-2
+                                            focus:ring-[#C8553D]
+                                        "
+                            >
+                                <option value="all">All</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+
                     </div>
 
                     {loading && (
@@ -189,11 +273,11 @@ export function DashboardPage() {
                         <>
 
                             {activeView === "dashboard" && (
-                                <AdminDashboard users={users} />
+                                <AdminDashboard users={filterUsers} />
                             )}
 
                             {activeView === "table" && (
-                                <UserTable users={users} />
+                                <UserTable users={filterUsers} />
                             )}
                         </>
                     )}

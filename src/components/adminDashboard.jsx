@@ -1,5 +1,6 @@
 import {TotalUsers, uniqueCountries, AverageAge} from "../utils/userCardUtilityFunctions.js";
-import {GenderDoughnutChart} from "./genderChart.jsx";
+import {GenderDoughnutChart} from "./chart/genderChart.jsx";
+import {UsersByCountryBarChart} from "./chart/userCountryChart.jsx";
 
 function DataCard({ title, data }) {
     return (
@@ -94,9 +95,7 @@ export function AdminDashboard({ users }) {
                         items-center
                         justify-center
                     ">
-                        <p className="text-[#666666]">
-                            Future Chart Here
-                        </p>
+                        <UsersByCountryBarChart users={users} />
                     </div>
                 </div>
 
