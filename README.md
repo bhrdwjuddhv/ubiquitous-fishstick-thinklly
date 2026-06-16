@@ -1,8 +1,13 @@
 # Thinklly Frontend Assessment
 
-**Live Deploy Link:** [https://ubiquitous-fishstick-thinklly.vercel.app/](https://ubiquitous-fishstick-thinklly.vercel.app/)
-**Live Demo:** [https://www.youtube.com/watch?v=UJR5yE7Bz-E](https://www.youtube.com/watch?v=UJR5yE7Bz-E)
-**Design and Development Approach** [https://ubiquitous-fishstick-thinklly.vercel.app/approach](https://ubiquitous-fishstick-thinklly.vercel.app/approach)
+**Live Deploy Link:**  
+https://ubiquitous-fishstick-thinklly.vercel.app/
+
+**Live Demo:**  
+https://www.youtube.com/watch?v=UJR5yE7Bz-E
+
+**Design and Development Approach:**  
+https://ubiquitous-fishstick-thinklly.vercel.app/approach
 
 
 A responsive React.js web application developed as part of the Thinklly Frontend Assessment.
